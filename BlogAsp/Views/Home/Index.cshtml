@@ -1,8 +1,21 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<BlogAsp.Models.User>
+@{
+    ViewData["Title"] = "Все пользователи";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<a asp-action="create">Добавить пользователя</a>
+<table class="table">
+    <tr>
+        <td>Email</td>
+        <td>Login</td>
+        <td>Password</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Email</td>
+            <td>@item.Login</td>
+            <td>@item.Password</td>
+        </tr>
+    }
+</table>

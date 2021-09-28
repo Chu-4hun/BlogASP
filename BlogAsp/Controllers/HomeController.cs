@@ -3,35 +3,58 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using BlogAsp.Data;
+using BlogAsp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BlogAsp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogAsp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private ApplicationDbContext bd;
+        
+        // private readonly ILogger<HomeController> _logger;
+        //
+        public HomeController(ApplicationDbContext contex)
         {
-            _logger = logger;
+            bd = contex;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
+        {
+            return View(await bd.Users.ToListAsync());
+        }
+        
+        
+        public IActionResult Create()
         {
             return View();
         }
 
+        [HttpPost]
+
+        public async Task<IActionResult> Create(User user)
+        {
+            bd.Users.Add(user);
+            await bd.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+        // public IActionResult Privacy()
+        // {
+        //     return View();
+        // }
+        //
+        // [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        // public IActionResult Error()
+        // {
+        //     return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        // }
         public IActionResult Privacy()
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            throw new NotImplementedException();
         }
     }
 }
