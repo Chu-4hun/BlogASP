@@ -1,0 +1,26 @@
+﻿@model BlogAsp.Models.User
+
+@{
+    ViewData["Title"] = "Удаление пользователся";
+}
+<div>
+    <dl class="dl-horizontal">
+        <dt>Email</dt>
+        <dd>
+            @Html.DisplayFor(model => Model.Email)
+        </dd>
+        <dt>Login</dt>
+        <dd>
+            @Html.DisplayFor(model => Model.Login)
+        </dd>
+        <dt>Password</dt>
+        <dd>
+            @Html.DisplayFor(model => Model.Password)
+        </dd>
+    </dl>
+</div>
+<form asp-controller="Home" asp-action="delete">
+    <div class="form-group">
+        <input type="submit" value="Delete" class="form-control">
+    </div>
+</form>

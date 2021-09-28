@@ -16,6 +16,12 @@
             <td>@item.Email</td>
             <td>@item.Login</td>
             <td>@item.Password</td>
+            <td>
+                <a asp-action="Delete" asp-controller="Home" asp-route-id="@item.Id">X</a>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-controller="Home" asp-route-id="@item.Id">Edit</a>
+            </td>
         </tr>
     }
 </table>

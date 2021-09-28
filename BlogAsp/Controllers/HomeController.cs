@@ -56,5 +56,16 @@ namespace BlogAsp.Controllers
         {
             throw new NotImplementedException();
         }
+
+
+        public IActionResult Delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IActionResult Edit()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
