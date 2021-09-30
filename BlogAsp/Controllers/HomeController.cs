@@ -57,11 +57,39 @@ namespace BlogAsp.Controllers
             throw new NotImplementedException();
         }
 
-
-        public IActionResult Delete()
+        [HttpGet]
+        [ActionName("Delete")]
+        public async Task<IActionResult> ColDelete(int? id)
         {
-            throw new NotImplementedException();
+            if (id != null)
+            {
+                User user = await bd.Users.FirstOrDefaultAsync(predicate => predicate.Id == id);
+                if (user != null)
+                {
+                    return View(user);
+                }
+            }
+
+            return NotFound();
         }
+        [HttpPost]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id != null)
+            {
+                User user = await bd.Users.FirstOrDefaultAsync(predicate => predicate.Id == id);
+                if (user != null)
+                {
+                    bd.Users.Remove(user);
+                    await bd.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+            }
+
+            return NotFound();
+        }
+
+        
 
         public IActionResult Edit()
         {
