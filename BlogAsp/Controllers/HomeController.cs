@@ -35,7 +35,6 @@ namespace BlogAsp.Controllers
         }
 
         [HttpPost]
-
         public async Task<IActionResult> Create(User user)
         {
             bd.Users.Add(user);
@@ -90,10 +89,25 @@ namespace BlogAsp.Controllers
         }
 
         
-
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit(int? id)
         {
-            throw new NotImplementedException();
+            if (id != null)
+            {
+                User user = await bd.Users.FirstOrDefaultAsync(predicate => predicate.Id == id);
+                if (user != null)
+                {
+                    return View(user);
+                }
+            }
+
+            return NotFound();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(User user)
+        {
+            bd.Users.Update(user);
+            await bd.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
     }
 }
