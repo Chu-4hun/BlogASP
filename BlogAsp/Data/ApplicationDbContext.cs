@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlogAsp.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : DbContext
     {
          public DbSet<User> Users { get; set; }
          
