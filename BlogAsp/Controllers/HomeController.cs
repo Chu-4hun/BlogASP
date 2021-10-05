@@ -33,6 +33,10 @@ namespace BlogAsp.Controllers
         {
             return View();
         }
+        public IActionResult Auth()
+        {
+            return View();
+        }
 
         [HttpPost]
         public async Task<IActionResult> Create(User user)
