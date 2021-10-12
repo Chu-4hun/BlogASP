@@ -8,20 +8,22 @@
     <tr>
         <td>Email</td>
         <td>Login</td>
-        <td>Password</td>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
             <td>@item.Email</td>
             <td>@item.Login</td>
-            <td>@item.Password</td>
+            <td>
+                <a asp-action="Details" asp-controller="Home" asp-route-id="@item.Id">Подробнее</a>
+            </td>
             <td>
                 <a asp-action="Delete" asp-controller="Home" asp-route-id="@item.Id">X</a>
             </td>
             <td>
                 <a asp-action="Edit" asp-controller="Home" asp-route-id="@item.Id">Edit</a>
             </td>
+
         </tr>
     }
 </table>

@@ -11,4 +11,12 @@ namespace BlogAsp.Models
         public string Login { get; set; }
         public string Password { get; set; }
     }
+
+    public enum SortState
+    {
+        LoginAsc,
+        LoginDesc,
+        EmailAsc,
+        EmailDesc,
+    }
 }

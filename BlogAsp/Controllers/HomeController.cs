@@ -23,10 +23,11 @@ namespace BlogAsp.Controllers
             bd = contex;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(SortState sortOrder = SortState.EmailAsc)
         {
             return View(await bd.Users.ToListAsync());
         }
+        
         
         
         public IActionResult Create()
@@ -112,6 +113,19 @@ namespace BlogAsp.Controllers
             bd.Users.Update(user);
             await bd.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id != null)
+            {
+                User user = await bd.Users.FirstOrDefaultAsync(predicate => predicate.Id == id);
+                if (user != null)
+                {
+                    return View(user);
+                }
+            }
+
+            return NotFound();
         }
     }
 }
